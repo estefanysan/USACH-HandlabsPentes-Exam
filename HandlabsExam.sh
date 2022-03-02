@@ -31,4 +31,4 @@ help() {
     echo "  Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
     exit 1
 }
-
+help
