@@ -21,7 +21,7 @@ help() {
     echo "  Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
     exit 1
 }
-
+help
 
 #Check Docker status (Instaled/running)#
 
@@ -61,6 +61,6 @@ list() {
     exit 1
 
 }
-help
+
 
 #Prueba de modificacion 23453
