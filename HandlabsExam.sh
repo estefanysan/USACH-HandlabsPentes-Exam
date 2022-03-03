@@ -3,7 +3,7 @@
 ETC_HOSTS=/etc/hosts
 
 # Help List #
-Help() {
+show_help() {
     echo "Local PentestLab Docker based"
     echo "Mode of use: ./HandlabsExam.sh (start|stop|status|info|list} [projectname]" >&2
     echo "This script use docker and hosts alias to make vulnerable web apps available on localhost"
@@ -81,7 +81,7 @@ info () {
       ;;
   esac  
 }
-info
+
 #Project Info#
 project_info_bwapp () 
 {
@@ -143,7 +143,7 @@ case "$1" in
     info $2
     ;;
   *)
-   Help
+   show_help
 ;;
 esac  
 
