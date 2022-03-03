@@ -81,7 +81,7 @@ info () {
       ;;
   esac  
 }
-
+info
 #Project Info#
 project_info_bwapp () 
 {
