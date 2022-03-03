@@ -21,7 +21,7 @@ help() {
     echo "  Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
     exit 1
 }
-help
+
 
 #Check Docker status (Instaled/running)#
 
@@ -51,10 +51,6 @@ list() {
     echo "  bwapp 		- bWAPP PHP/MySQL based from itsecgames.com"
     echo "  webgoat7		- WebGoat 7.1 OWASP Flagship Project"
     echo "  webgoat8		- WebGoat 8.0 OWASP Flagship Project"
-    echo "  nodegoat		- NodeGoat OWASP Project"
-    echo "  dvwa     		- Damn Vulnerable Web Application"
-    echo "  mutillidae		- OWASP Mutillidae II"
-    echo "  juiceshop		- OWASP Juice Shop"
     echo "  vulnerablewordpress	- WPScan Vulnerable Wordpress"
     echo "  securityninjas	- OpenDNS Security Ninjas"
     echo
@@ -62,5 +58,51 @@ list() {
 
 }
 
+#Info dispatch#
+info () {
+  case "$1" in 
+    bwapp)
+      project_info_bwapp
+      ;;
+    webgoat7)
+      project_info_webgoat7
+      ;;
+    webgoat8)
+      project_info_webgoat8      
+      ;;
+    vulnerablewordpress)
+      project_info_vulnerablewordpress
+    ;;
+    securityninjas)
+      project_info_securityninjas
+    ;;
+    *) 
+      echo "Unknown project name"
+      list
+      ;;
+  esac  
+}
+
+#Project Info#
+project_info_bwapp () 
+{
+echo "http://www.itsecgames.com"
+}
+project_info_webgoat7 () 
+{
+echo "https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project"
+}
+project_info_webgoat8 () 
+{
+echo "  https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project"
+}
+project_info_vulnerablewordpress () 
+{
+echo "https://github.com/wpscanteam/VulnerableWordpress"
+}
+project_info_securityninjas () 
+{
+echo "https://github.com/opendns/Security_Ninjas_AppSec_Training"
+}
 
 #Prueba de modificacion 23453
