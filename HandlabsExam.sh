@@ -15,6 +15,7 @@ show_help() {
 	echo " ./HandlabsExam.sh list - List all available projects"
 	echo
     echo " Dockerfiles from:"
+	echo "  Vulnerable GraphQL API - Carve Systems LLC (carvesystems/vulnerable-graphql-api)"
     echo "  bWapp                  - Rory McCune (raesene/bwapp)"
     echo "  Webgoat(s)             - OWASP Project"
     echo "  Vulnerable Wordpress   - WPScan Team (l505/vulnerablewordpress)"
@@ -48,6 +49,7 @@ fi
 #List vulnerable apps#
 list() {
     echo "Available pentest applications" >&2
+	echo "  graphql		- Vulnerable GraphQL API"
     echo "  bwapp 		- bWAPP PHP/MySQL based from itsecgames.com"
     echo "  webgoat7		- WebGoat 7.1 OWASP Flagship Project"
     echo "  webgoat8		- WebGoat 8.0 OWASP Flagship Project"
@@ -61,6 +63,9 @@ list() {
 #Info dispatch#
 info () {
   case "$1" in 
+	graphql)
+      project_info_graphql
+    ;;
     bwapp)
       project_info_bwapp
       ;;
@@ -113,6 +118,10 @@ function addhost() { # ex.   127.5.0.1	bwapp
 }
 
 #Project Info#
+project_info_graphql () 
+{
+echo "https://carvesystems.com/news/the-5-most-common-graphql-security-vulnerabilities/"
+}
 project_info_bwapp () 
 {
 echo "http://www.itsecgames.com"
@@ -181,6 +190,11 @@ project_stop ()
 
 project_status()
 {
+  if [ "$(sudo docker ps -q -f name=graphql)" ]; then
+    echo "Vulnerable GraphQL API	running at http://bwapp"
+  else 
+    echo "Vulnerable GraphQL API	not running"
+	fi
   if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
     echo "bWaPP				running at http://bwapp"
   else 
@@ -211,6 +225,10 @@ project_status()
 project_start_dispatch()
 {
   case "$1" in
+	graphql)    
+      project_start "Vulnerable GraphQL API" "graphql" "carvesystems/vulnerable-graphql-api" "127.15.0.1" "3000"
+      project_startinfo_graphql
+    ;;
     bwapp)
       project_start "bWAPP" "bwapp" "raesene/bwapp" "127.5.0.1" "80"
       project_startinfo_bwapp
@@ -240,6 +258,9 @@ project_start_dispatch()
 project_stop_dispatch()
 {
   case "$1" in
+	graphql)
+      project_stop "Vulnerable GraphQL API" "graphql"
+    ;;
     bwapp)
       project_stop "bWAPP" "bwapp"
     ;;
