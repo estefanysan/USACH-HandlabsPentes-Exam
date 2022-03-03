@@ -21,7 +21,7 @@ help() {
     echo "  Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
     exit 1
 }
-help
+
 
 #Check Docker status (Instaled/running)#
 
@@ -57,7 +57,7 @@ list() {
     exit 1
 
 }
-
+list
 #Info dispatch#
 info () {
   case "$1" in 
@@ -78,7 +78,6 @@ info () {
     ;;
     *) 
       echo "Unknown project name"
-      list
       ;;
   esac  
 }
@@ -104,5 +103,6 @@ project_info_securityninjas ()
 {
 echo "https://github.com/opendns/Security_Ninjas_AppSec_Training"
 }
+
 
 #Prueba de modificacion 23453
