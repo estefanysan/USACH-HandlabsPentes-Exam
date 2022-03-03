@@ -5,7 +5,7 @@ ETC_HOSTS=/etc/hosts
 # Help List #
 help() {
     echo "Local PentestLab Docker based"
-    echo "Mode of use: ./HandlabsExam.sh (start|stop|status|info|list} [projectname]"
+    echo "Mode of use: ./HandlabsExam.sh (start|stop|status|info|list} [projectname]" >&2
     echo "This script use docker and hosts alias to make vulnerable web apps available on localhost"
     echo "some examples of use are:"
     echo " ./HandlabsExam.sh start bwapp - Start project and make it available on localhost"
@@ -21,6 +21,7 @@ help() {
     echo "  Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
     exit 1
 }
+
 
 #Check Docker status (Instaled/running)#
 
@@ -46,10 +47,14 @@ fi
 
 #List vulnerable apps#
 list() {
-    echo "Available pentest applications"
+    echo "Available pentest applications" >&2
     echo "  bwapp 		- bWAPP PHP/MySQL based from itsecgames.com"
     echo "  webgoat7		- WebGoat 7.1 OWASP Flagship Project"
     echo "  webgoat8		- WebGoat 8.0 OWASP Flagship Project"
+    echo "  nodegoat		- NodeGoat OWASP Project"
+    echo "  dvwa     		- Damn Vulnerable Web Application"
+    echo "  mutillidae		- OWASP Mutillidae II"
+    echo "  juiceshop		- OWASP Juice Shop"
     echo "  vulnerablewordpress	- WPScan Vulnerable Wordpress"
     echo "  securityninjas	- OpenDNS Security Ninjas"
     echo
