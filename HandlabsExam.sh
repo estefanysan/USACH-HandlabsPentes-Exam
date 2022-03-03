@@ -3,7 +3,7 @@
 ETC_HOSTS=/etc/hosts
 
 # Help List #
-help() {
+Help() {
     echo "Local PentestLab Docker based"
     echo "Mode of use: ./HandlabsExam.sh (start|stop|status|info|list} [projectname]" >&2
     echo "This script use docker and hosts alias to make vulnerable web apps available on localhost"
@@ -104,5 +104,47 @@ project_info_securityninjas ()
 echo "https://github.com/opendns/Security_Ninjas_AppSec_Training"
 }
 
+# Main switch case#
+case "$1" in
+  # start)
+    # if [ -z "$2" ]
+    # then
+      # echo "ERROR: Option start needs project name in lowercase"
+      # echo 
+      # list # call list ()
+      # break
+    # fi
+    # project_start_dispatch $2
+    # ;;
+  # stop)
+    # if [ -z "$2" ]
+    # then
+      # echo "ERROR: Option stop needs project name in lowercase"
+      # echo 
+      # list # call list ()
+      # break
+    # fi
+    # project_stop_dispatch $2
+    # ;;
+  list)
+    list # call list ()
+    ;;
+  # status)
+    # project_status # call project_status ()
+    # ;;
+  info)
+    if [ -z "$2" ]
+    then
+      echo "ERROR: Option info needs project name in lowercase"
+      echo 
+      list # call list ()
+      break
+    fi
+    info $2
+    ;;
+  *)
+   Help
+;;
+esac  
 
 #Prueba de modificacion 23453
