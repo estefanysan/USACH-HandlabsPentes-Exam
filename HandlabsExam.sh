@@ -83,6 +83,35 @@ info () {
   esac  
 }
 
+#hosts file#
+function removehost() {
+    if [ -n "$(grep $1 /etc/hosts)" ]
+    then
+        echo "Removing $1 from $ETC_HOSTS";
+        sudo sed -i".bak" "/$1/d" $ETC_HOSTS
+    else
+        echo "$1 was not found in your $ETC_HOSTS";
+    fi
+}
+
+function addhost() { # ex.   127.5.0.1	bwapp
+    HOSTS_LINE="$1\t$2"
+    if [ -n "$(grep $2 /etc/hosts)" ]
+        then
+            echo "$2 already exists in /etc/hosts"
+        else
+            echo "Adding $2 to your $ETC_HOSTS";
+            sudo -- sh -c -e "echo '$HOSTS_LINE' >> /etc/hosts";
+
+            if [ -n "$(grep $2 /etc/hosts)" ]
+                then
+                    echo -e "$HOSTS_LINE was added succesfully to /etc/hosts";
+                else
+                    echo "Failed to Add $2, Try again!";
+            fi
+    fi
+}
+
 #Project Info#
 project_info_bwapp () 
 {
@@ -105,34 +134,162 @@ project_info_securityninjas ()
 echo "https://github.com/opendns/Security_Ninjas_AppSec_Training"
 }
 
+#Start#
+project_start ()
+{
+  fullname=$1		# ex. WebGoat 7.1
+  projectname=$2     	# ex. webgoat7
+  dockername=$3  	# ex. raesene/bwapp
+  ip=$4   		# ex. 127.5.0.1
+  port=$5		# ex. 80
+  port2=$6		# optional second port binding
+  
+  echo "Starting $fullname"
+  addhost "$ip" "$projectname"
+
+
+  if [ "$(sudo docker ps -aq -f name=$projectname)" ]; 
+  then
+    echo "Running command: docker start $projectname"
+    sudo docker start $projectname
+  else
+    if [ -n "${6+set}" ]; then
+      echo "Running command: docker run --name $projectname -d -p $ip:80:$port -p $ip:$port2:$port2 $dockername"
+      sudo docker run --name $projectname -d -p $ip:80:$port -p $ip:$port2:$port2 $dockername
+    else echo "not set";
+      echo "Running command: docker run --name $projectname -d -p $ip:80:$port $dockername"
+      sudo docker run --name $projectname -d -p $ip:80:$port $dockername
+    fi
+  fi
+  echo "DONE!"
+  echo
+  echo "Docker mapped to http://$projectname or http://$ip"
+  echo
+}
+
+#Stop#
+project_stop ()
+{
+  fullname=$1	# ex. WebGoat 7.1
+  projectname=$2     # ex. webgoat7
+
+  echo "Stopping... $fullname"
+  echo "Running command: docker stop $projectname"
+  sudo docker stop $projectname
+  removehost "$projectname"
+}
+
+project_status()
+{
+  if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
+    echo "bWaPP				running at http://bwapp"
+  else 
+    echo "bWaPP				not running"
+  fi
+  if [ "$(sudo docker ps -q -f name=webgoat7)" ]; then
+    echo "WebGoat 7.1			running at http://webgoat7/WebGoat"
+  else 
+    echo "WebGoat 7.1			not running"  
+  fi
+  if [ "$(sudo docker ps -q -f name=webgoat8)" ]; then
+    echo "WebGoat 8.0			running at http://webgoat8/WebGoat"
+  else 
+    echo "WebGoat 8.0			not running"  
+  fi
+  if [ "$(sudo docker ps -q -f name=vulnerablewordpress)" ]; then
+    echo "WPScan Vulnerable Wordpress 	running at http://vulnerablewordpress"
+  else 
+    echo "WPScan Vulnerable Wordpress	not running"  
+  fi
+  if [ "$(sudo docker ps -q -f name=securityninjas)" ]; then
+    echo "OpenDNS Security Ninjas 	running at http://securityninjas"
+  else 
+    echo "OpenDNS Security Ninjas	not running"  
+  fi
+}
+
+project_start_dispatch()
+{
+  case "$1" in
+    bwapp)
+      project_start "bWAPP" "bwapp" "raesene/bwapp" "127.5.0.1" "80"
+      project_startinfo_bwapp
+    ;;
+    webgoat7)
+      project_start "WebGoat 7.1" "webgoat7" "webgoat/webgoat-7.1" "127.6.0.1" "8080"
+      project_startinfo_webgoat7
+    ;;
+    webgoat8)
+      project_start "WebGoat 8.0" "webgoat8" "webgoat/webgoat-8.0" "127.7.0.1" "8080"
+      project_startinfo_webgoat8
+    ;;
+    vulnerablewordpress)
+      project_start "WPScan Vulnerable Wordpress" "vulnerablewordpress" "l505/vulnerablewordpress" "127.13.0.1" "80" "3306"
+      project_startinfo_vulnerablewordpress
+    ;;
+    securityninjas)    
+      project_start "Open DNS Security Ninjas" "securityninjas" "opendns/security-ninjas" "127.14.0.1" "80"
+      project_startinfo_securityninjas
+    ;;
+    *)
+    echo "ERROR: Project dispatch doesn't recognize the project name" 
+    ;;
+  esac  
+}
+
+project_stop_dispatch()
+{
+  case "$1" in
+    bwapp)
+      project_stop "bWAPP" "bwapp"
+    ;;
+    webgoat7)
+      project_stop "WebGoat 7.1" "webgoat7"
+    ;;
+    webgoat8)
+      project_stop "WebGoat 8.0" "webgoat8"
+    ;;
+    vulnerablewordpress)
+      project_stop "WPScan Vulnerable Wordpress" "vulnerablewordpress"
+    ;;
+    securityninjas)
+      project_stop "Open DNS Security Ninjas" "securityninjas"
+    ;;
+    *)
+    echo "ERROR: Project dispatch doesn't recognize the project name" 
+    ;;
+  esac  
+}
+
+
 # Main switch case#
 case "$1" in
-  # start)
-    # if [ -z "$2" ]
-    # then
-      # echo "ERROR: Option start needs project name in lowercase"
-      # echo 
-      # list # call list ()
-      # break
-    # fi
-    # project_start_dispatch $2
-    # ;;
-  # stop)
-    # if [ -z "$2" ]
-    # then
-      # echo "ERROR: Option stop needs project name in lowercase"
-      # echo 
-      # list # call list ()
-      # break
-    # fi
-    # project_stop_dispatch $2
-    # ;;
+  start)
+    if [ -z "$2" ]
+    then
+      echo "ERROR: Option start needs project name in lowercase"
+      echo 
+      list # call list ()
+      break
+    fi
+    project_start_dispatch $2
+    ;;
+  stop)
+    if [ -z "$2" ]
+    then
+      echo "ERROR: Option stop needs project name in lowercase"
+      echo 
+      list # call list ()
+      break
+    fi
+    project_stop_dispatch $2
+    ;;
   list)
     list # call list ()
     ;;
-  # status)
-    # project_status # call project_status ()
-    # ;;
+  status)
+    project_status # call project_status ()
+    ;;
   info)
     if [ -z "$2" ]
     then
