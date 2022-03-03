@@ -57,7 +57,7 @@ list() {
     exit 1
 
 }
-list
+
 #Info dispatch#
 info () {
   case "$1" in 
@@ -78,6 +78,7 @@ info () {
     ;;
     *) 
       echo "Unknown project name"
+	  list
       ;;
   esac  
 }
