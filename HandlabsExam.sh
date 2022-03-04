@@ -16,6 +16,7 @@ show_help() {
 	echo
     echo " Dockerfiles from:"
 	echo "  Nowasp                 - Citizenstig (citizenstig/nowasp)"
+	echo "  Owasp Bricks           - gjuniioor/owasp-bricks"
     echo "  bWapp                  - Rory McCune (raesene/bwapp)"
     echo "  Webgoat(s)             - OWASP Project"
     echo "  Vulnerable Wordpress   - WPScan Team (l505/vulnerablewordpress)"
@@ -50,6 +51,7 @@ fi
 list() {
     echo "Available pentest applications" >&2
 	echo "  nowasp		- OWASP Mutillidae II Web Pen-Test Practice Application"
+	echo "  owasp-bricks	- OWASP Bricks"
     echo "  bwapp 		- bWAPP PHP/MySQL based from itsecgames.com"
     echo "  webgoat7		- WebGoat 7.1 OWASP Flagship Project"
     echo "  webgoat8		- WebGoat 8.0 OWASP Flagship Project"
@@ -65,6 +67,9 @@ info () {
   case "$1" in 
 	nowasp)
       project_info_nowasp
+    ;;
+	owasp-bricks)
+      project_info_owasp-bricks
     ;;
     bwapp)
       project_info_bwapp
@@ -121,6 +126,10 @@ function addhost() { # ex.   127.5.0.1	bwapp
 project_info_nowasp () 
 {
 echo "https://github.com/citizen-stig/dockermutillidae"
+}
+project_info_owasp-bricks () 
+{
+echo "https://github.com/gildasio/docker-bricks"
 }
 project_info_bwapp () 
 {
@@ -190,11 +199,16 @@ project_stop ()
 
 project_status()
 {
-  if [ "$(sudo docker ps -q -f name=graphql)" ]; then
+  if [ "$(sudo docker ps -q -f name=nowasp)" ]; then
     echo "Nowasp	running at http://nowasp"
   else 
     echo "Nowasp	not running"
-	fi
+  fi
+  if [ "$(sudo docker ps -q -f name=owasp-bricks)" ]; then
+    echo "Owasp Bricks	running at http://owasp-bricks"
+  else 
+    echo "Owasp Bricks	not running"
+  fi
   if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
     echo "bWaPP				running at http://bwapp"
   else 
@@ -229,6 +243,10 @@ project_start_dispatch()
       project_start "Nowasp" "nowasp" "citizenstig/nowasp" "127.15.0.1" "80"
       project_startinfo_nowasp
     ;;
+	owasp-bricks)    
+      project_start "Owasp Bricks" "owasp-bricks" "gjuniioor/bricks" "127.10.0.1" "80"
+      project_startinfo_owasp-bricks
+    ;;
     bwapp)
       project_start "bWAPP" "bwapp" "raesene/bwapp" "127.5.0.1" "80"
       project_startinfo_bwapp
@@ -261,6 +279,9 @@ project_stop_dispatch()
 	
 	nowasp)
       project_stop "Nowasp" "nowasp"
+    ;;
+	owasp-bricks)
+      project_stop "Owasp Bricks" "owasp-bricks"
     ;;
     bwapp)
       project_stop "bWAPP" "bwapp"
