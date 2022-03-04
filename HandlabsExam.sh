@@ -127,27 +127,92 @@ function addhost() { # ex.   127.5.0.1	bwapp
 #Project Info#
 project_info_nowasp () 
 {
-echo "https://github.com/citizen-stig/dockermutillidae"
+echo "OWASP Mutillidae II is a free, open source, deliberately vulnerable web-application"
+echo "providing a target for web-security enthusiest. Mutillidae can be installed on Linux and"
+echo "Windows using LAMP, WAMP, and XAMMP. It is pre-installed on SamuraiWTF, Rapid7"
+echo "Metasploitable-2, and OWASP BWA. The existing version can be updated on these"
+echo "platforms. With dozens of vulns and hints to help the user; this is an easy-to-use web"
+echo "hacking environment designed for labs, security enthusiast, classrooms, CTF, and"
+echo "vulnerability assessment tool targets. Mutillidae has been used in graduate security courses,"
+echo "corporate web sec training courses, and as an assess the assessor target for vulnerability"
+echo "assessment software"
 }
+project_startinfo_nowasp () 
+{
+echo "https://github.com/webpwnized/mutillidae/"
+echo "Remember to click on the create database link before you start"
+}
+
 project_info_owasp-bricks () 
 {
+echo "Bricks is a web application security learning platform built on PHP and MySQL."
+echo "The project focuses on variations of commonly seen application security issues."
+echo "Each 'Brick' has some sort of security issue which can be leveraged manually or using automated software tool"
+echo "The mission is to 'Break the Bricks' and thus learn the various aspects of web application security"
+
 echo "https://github.com/gildasio/docker-bricks"
 }
+project_startinfo_owasp-bricks () 
+{
+echo "Please see the documentation https://sechow.com/bricks/docs/"
+}
+
 project_info_bwapp () 
+{
+echo "bWAPP, or a buggy web application, is a free and open source deliberately insecure web application"
+echo "It helps security enthusiasts, developers and students to discover and to prevent web vulnerabilities."
+echo "bWAPP prepares one to conduct successful penetration testing and ethical hacking projects."
+echo "bWAPP is a PHP application that uses a MySQL database. It can be hosted on Linux/Windows with Apache/IIS"
+echo "and MySQL. It can also be installed with WAMP or XAMPP."
+echo "Another possibility is to download the bee-box, a custom Linux VM pre-installed with bWAPP"
+}
+project_startinfo_bwapp ()
 {
 echo "http://www.itsecgames.com"
 }
+
 project_info_wackopicko () 
+{
+echo "WackoPicko is a website written by Adam Doupé. It contains known and common vulnerabilities (XSS vulnerabilities,"
+echo "SQL injections, command-line injections, sessionID vulnerabilities, file inclusions, parameters manipulation, ...)."
+echo "It was first used for the paper Why Johnny Can't Pentest: An Analysis of Black-box Web Vulnerability Scanners."
+echo "WackoPicko has been developed as a *real* web application with following features:"
+echo "Authentication: WackoPicko provides personalized content to registered users."
+echo "Upload Pictures: When a photo is uploaded to WackoPicko by a registered user, other users can comment on it, as well as purchase the right to a high-quality version."
+echo "Comment On Pictures: Once a picture is uploaded into WackoPicko, all registered users can comment on the photo by ﬁlling out a form."
+echo "Purchase Pictures: A registered user on WackoPicko can purchase the high-quality version of a picture."
+echo "Search: The search feature offers the possibility to filter pictures by looking for strings in the tags of the images"
+echo "Guestbook: A guestbook page provides a way to receive feedback from all visitors to the WackoPicko web site."
+echo "Admin Area: WackoPicko has a special area for administrators only, which enables the creation of new users."
+
+}
+project_startinfo_wackopicko () 
 {
 echo "https://www.aldeid.com/wiki/WackoPicko"
 }
+
 project_info_vulnerablewordpress () 
 {
 echo "https://github.com/wpscanteam/VulnerableWordpress"
+echo "Vulnerable Wordpress Application"
+echo "support technologies like PHP and MySQL"
 }
+project_startinfo_vulnerablewordpress () 
+{
+  echo "WPScan Vulnerable Wordpress site now awailable at localhost on http://127.13.0.1"
+}
+
 project_info_securityninjas () 
 {
-echo "https://github.com/opendns/Security_Ninjas_AppSec_Training"
+echo "This hands-on training lab consists of 10 fun real world like hacking exercises, corresponding to each of the OWASP"
+echo "Top 10 vulnerabilities. Hints and solutions are provided along the way. Although the backend for this is written in"
+echo "PHP, vulnerabilities would remain the same across all web based languages, so the training would still be relevant"
+echo "even if you don’t actively code in PHP."
+}
+project_startinfo_securityninjas ()
+{
+  echo "Open DNS Security Ninjas site now available at localhost on http://127.14.0.1"
+  echo "for more information, please consult https://github.com/opendns/Security_Ninjas_AppSec_Training"
 }
 
 #Start#
@@ -179,7 +244,7 @@ project_start ()
   fi
   echo "DONE!"
   echo
-  echo "Docker mapped to http://$projectname or http://$ip"
+  echo "Docker mapped to http://$ip"
   echo
 }
 
