@@ -200,8 +200,8 @@ project_status()
   fullname=$1		 # ex. Nowasp
   projectname=$2     # ex. nowasp
 
-  if [ "$(sudo docker ps -q -f name=$projectname)" ]; then
-    echo "$fullname	running at http://ip"
+  if [ "$(sudo docker ps -q -f status=running)" ]; then
+    echo "$fullname	running at http://$ip"
   else 
     echo "$fullname	not running"
   fi
