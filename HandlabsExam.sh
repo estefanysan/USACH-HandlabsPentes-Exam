@@ -8,10 +8,10 @@ show_help() {
     echo "Mode of use: ./HandlabsExam.sh (start|stop|status|info|list} [projectname]" >&2
     echo "This script use docker and hosts alias to make vulnerable web apps available on localhost"
     echo "some examples of use are:"
-    echo " ./HandlabsExam.sh start bwapp   - Start project and make it available on localhost"
-	echo " ./HandlabsExam.sh stop bwapp    - Stop project available on localhost"
+    echo " ./HandlabsExam.sh start nowasp   - Start project and make it available on localhost"
+	echo " ./HandlabsExam.sh stop nowasp    - Stop project available on localhost"
     echo " ./HandlabsExam.sh status        - Show status for all projects"
-    echo " ./HandlabsExam.sh info bwapp    - Show information about bwapp project"
+    echo " ./HandlabsExam.sh info nowasp    - Show information about bwapp project"
 	echo " ./HandlabsExam.sh list          - List all available projects"
 	echo
     echo " Dockerfiles from:"
@@ -288,7 +288,7 @@ project_status()
     echo "WPScan Vulnerable Wordpress not running"  
   fi
   if [ "$(sudo docker ps -q -f name=securityninjas)" ]; then
-    echo "OpenDNS Security Ninjas 	running at http://127.14.0.1"
+    echo "OpenDNS Security Ninjas 	running at http://127.1.0.1"
   else 
     echo "OpenDNS Security Ninjas	not running"  
   fi
@@ -319,7 +319,7 @@ project_start_dispatch()
       project_startinfo_vulnerablewordpress
     ;;
     securityninjas)    
-      project_start "Open DNS Security Ninjas" "securityninjas" "opendns/security-ninjas" "127.14.0.1" "80"
+      project_start "Open DNS Security Ninjas" "securityninjas" "opendns/security-ninjas" "127.1.0.1" "80"
       project_startinfo_securityninjas
     ;;
     *)
