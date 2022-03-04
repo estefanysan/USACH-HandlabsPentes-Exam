@@ -201,35 +201,10 @@ project_status()
   projectname=$2     # ex. nowasp
 
   if [ "$(sudo docker ps -q -f status=running)" ]; then
-    echo "$fullname	running at http://$ip"
+    echo "$fullname	corriendo at http://$ip"
   else 
-    echo "$fullname	not running"
+    echo "$fullname	not corriendo"
   fi
-  # if [ "$(sudo docker ps -q -f name=owasp-bricks)" ]; then
-    # echo "Owasp Bricks	running at http://ip"
-  # else 
-    # echo "Owasp Bricks	not running"
-  # fi
-  # if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
-    # echo "bWaPP				running at http://ip"
-  # else 
-    # echo "bWaPP				not running"
-  # fi
-  # if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
-    # echo "WackoPicko				running at http://ip"
-  # else 
-    # echo "WackoPicko				not running"
-  # fi
-  # if [ "$(sudo docker ps -q -f name=vulnerablewordpress)" ]; then
-    # echo "WPScan Vulnerable Wordpress 	running at http://vulnerablewordpress"
-  # else 
-    # echo "WPScan Vulnerable Wordpress	not running"  
-  # fi
-  # if [ "$(sudo docker ps -q -f name=securityninjas)" ]; then
-    # echo "OpenDNS Security Ninjas 	running at http://securityninjas"
-  # else 
-    # echo "OpenDNS Security Ninjas	not running"  
-  # fi
 }
 
 project_start_dispatch()
