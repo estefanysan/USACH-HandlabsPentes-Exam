@@ -18,7 +18,7 @@ show_help() {
 	echo "  Nowasp                 - Citizenstig (citizenstig/nowasp)"
 	echo "  Owasp Bricks           - gjuniioor/owasp-bricks"
     echo "  bWapp                  - Rory McCune (raesene/bwapp)"
-    echo "  Webgoat(s)             - OWASP Project"
+    echo "  WackoPicko             - Vulnerable Website"
     echo "  Vulnerable Wordpress   - WPScan Team (l505/vulnerablewordpress)"
     echo "  Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
     exit 1
@@ -50,13 +50,12 @@ fi
 #List vulnerable apps#
 list() {
     echo "Available pentest applications" >&2
-	echo "  nowasp		- OWASP Mutillidae II Web Pen-Test Practice Application"
-	echo "  owasp-bricks	- OWASP Bricks"
-    echo "  bwapp 		- bWAPP PHP/MySQL based from itsecgames.com"
-    echo "  webgoat7		- WebGoat 7.1 OWASP Flagship Project"
-    echo "  webgoat8		- WebGoat 8.0 OWASP Flagship Project"
+	echo "  nowasp				- OWASP Mutillidae II Web Pen-Test Practice Application"
+	echo "  owasp-bricks		- OWASP Bricks"
+    echo "  bwapp 				- bWAPP PHP/MySQL based from itsecgames.com"
+    echo "  wackopicko			- WackoPicko Vulnerable Website"
     echo "  vulnerablewordpress	- WPScan Vulnerable Wordpress"
-    echo "  securityninjas	- OpenDNS Security Ninjas"
+    echo "  securityninjas		- OpenDNS Security Ninjas"
     echo
     exit 1
 
@@ -73,6 +72,9 @@ info () {
     ;;
     bwapp)
       project_info_bwapp
+      ;;
+	wackopicko)
+      project_info_wackopicko
       ;;
     webgoat7)
       project_info_webgoat7
@@ -135,13 +137,9 @@ project_info_bwapp ()
 {
 echo "http://www.itsecgames.com"
 }
-project_info_webgoat7 () 
+project_info_wackopicko () 
 {
-echo "https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project"
-}
-project_info_webgoat8 () 
-{
-echo "  https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project"
+echo "https://www.aldeid.com/wiki/WackoPicko"
 }
 project_info_vulnerablewordpress () 
 {
@@ -214,15 +212,10 @@ project_status()
   else 
     echo "bWaPP				not running"
   fi
-  if [ "$(sudo docker ps -q -f name=webgoat7)" ]; then
-    echo "WebGoat 7.1			running at http://webgoat7/WebGoat"
+  if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
+    echo "WackoPicko				running at http://wackopicko"
   else 
-    echo "WebGoat 7.1			not running"  
-  fi
-  if [ "$(sudo docker ps -q -f name=webgoat8)" ]; then
-    echo "WebGoat 8.0			running at http://webgoat8/WebGoat"
-  else 
-    echo "WebGoat 8.0			not running"  
+    echo "WackoPicko				not running"
   fi
   if [ "$(sudo docker ps -q -f name=vulnerablewordpress)" ]; then
     echo "WPScan Vulnerable Wordpress 	running at http://vulnerablewordpress"
@@ -251,13 +244,9 @@ project_start_dispatch()
       project_start "bWAPP" "bwapp" "raesene/bwapp" "127.5.0.1" "80"
       project_startinfo_bwapp
     ;;
-    webgoat7)
-      project_start "WebGoat 7.1" "webgoat7" "webgoat/webgoat-7.1" "127.6.0.1" "8080"
-      project_startinfo_webgoat7
-    ;;
-    webgoat8)
-      project_start "WebGoat 8.0" "webgoat8" "webgoat/webgoat-8.0" "127.7.0.1" "8080"
-      project_startinfo_webgoat8
+	wackopicko)
+      project_start "WackoPicko" "wackopicko" "adamdoupe/wackopicko" "127.0.0.1" "80" "8080"
+      project_startinfo_bwapp
     ;;
     vulnerablewordpress)
       project_start "WPScan Vulnerable Wordpress" "vulnerablewordpress" "l505/vulnerablewordpress" "127.13.0.1" "80" "3306"
@@ -286,11 +275,8 @@ project_stop_dispatch()
     bwapp)
       project_stop "bWAPP" "bwapp"
     ;;
-    webgoat7)
-      project_stop "WebGoat 7.1" "webgoat7"
-    ;;
-    webgoat8)
-      project_stop "WebGoat 8.0" "webgoat8"
+	wackopicko)
+      project_stop "WackoPicko" "wackopicko"
     ;;
     vulnerablewordpress)
       project_stop "WPScan Vulnerable Wordpress" "vulnerablewordpress"
