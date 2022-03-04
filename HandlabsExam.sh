@@ -201,7 +201,7 @@ project_status()
   projectname=$2      # ex. nowasp
   ip=$4   			  # ex. 127.15.0.1
     
-  if [ "$(sudo docker ps -q -f status=running)" ];
+  if [ "$(sudo docker ps -q -f name=$projectname)" ];
   then 
 	echo "$fullname running"
   else
