@@ -244,7 +244,7 @@ project_start_dispatch()
       project_startinfo_nowasp
     ;;
 	owasp-bricks)    
-      project_start "Owasp Bricks" "owasp-bricks" "gjuniioor/bricks:latest" "127.10.0.1" "80"
+      project_start "Owasp Bricks" "owasp-bricks" "gjuniioor/owasp-bricks" "127.10.0.1" "80"
       project_startinfo_owasp-bricks
     ;;
     bwapp)
