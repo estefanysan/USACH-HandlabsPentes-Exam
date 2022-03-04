@@ -8,19 +8,19 @@ show_help() {
     echo "Mode of use: ./HandlabsExam.sh (start|stop|status|info|list} [projectname]" >&2
     echo "This script use docker and hosts alias to make vulnerable web apps available on localhost"
     echo "some examples of use are:"
-    echo " ./HandlabsExam.sh start bwapp - Start project and make it available on localhost"
-	echo " ./HandlabsExam.sh stop bwapp - Stop project available on localhost"
-    echo " ./HandlabsExam.sh status - Show status for all projects"
-    echo " ./HandlabsExam.sh info bwapp - Show information about bwapp project"
-	echo " ./HandlabsExam.sh list - List all available projects"
+    echo " ./HandlabsExam.sh start bwapp   - Start project and make it available on localhost"
+	echo " ./HandlabsExam.sh stop bwapp    - Stop project available on localhost"
+    echo " ./HandlabsExam.sh status        - Show status for all projects"
+    echo " ./HandlabsExam.sh info bwapp    - Show information about bwapp project"
+	echo " ./HandlabsExam.sh list          - List all available projects"
 	echo
     echo " Dockerfiles from:"
-	echo "  Nowasp                 - Citizenstig (citizenstig/nowasp)"
-	echo "  Owasp Bricks           - gjuniioor/owasp-bricks"
-    echo "  bWapp                  - Rory McCune (raesene/bwapp)"
-    echo "  WackoPicko             - Vulnerable Website"
-    echo "  Vulnerable Wordpress   - WPScan Team (l505/vulnerablewordpress)"
-    echo "  Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
+	echo " Nowasp                 - Citizenstig (citizenstig/nowasp)"
+	echo " Owasp Bricks           - gjuniioor/owasp-bricks"
+    echo " bWapp                  - Rory McCune (raesene/bwapp)"
+    echo " WackoPicko             - Vulnerable Website"
+    echo " Vulnerable Wordpress   - WPScan Team (l505/vulnerablewordpress)"
+    echo " Security Ninjas        - OpenDNS Security Ninjas AppSec Training"
     exit 1
 }
 
@@ -153,12 +153,12 @@ echo "https://github.com/opendns/Security_Ninjas_AppSec_Training"
 #Start#
 project_start ()
 {
-  fullname=$1		# ex. WebGoat 7.1
-  projectname=$2     	# ex. webgoat7
-  dockername=$3  	# ex. raesene/bwapp
-  ip=$4   		# ex. 127.5.0.1
-  port=$5		# ex. 80
-  port2=$6		# optional second port binding
+  fullname=$1		  # ex. Nowasp
+  projectname=$2      # ex. nowasp
+  dockername=$3  	  # ex. citizenstig/nowasp
+  ip=$4   			  # ex. 127.15.0.1
+  port=$5			  # ex. 80
+  port2=$6			  # second port binding (Optional)
   
   echo "Starting $fullname"
   addhost "$ip" "$projectname"
@@ -186,8 +186,8 @@ project_start ()
 #Stop#
 project_stop ()
 {
-  fullname=$1	# ex. WebGoat 7.1
-  projectname=$2     # ex. webgoat7
+  fullname=$1		 # ex. Nowasp
+  projectname=$2     # ex. nowasp
 
   echo "Stopping... $fullname"
   echo "Running command: docker stop $projectname"
@@ -197,37 +197,37 @@ project_stop ()
 
 project_status()
 {
-  if [ "$(sudo docker ps -q -f name=nowasp)" ]; then
-    echo "Nowasp	running at http://nowasp"
+  if [ "$(sudo docker ps -q -f name=$projectname)" ]; then
+    echo "$fullname	running at http://ip"
   else 
-    echo "Nowasp	not running"
+    echo "$fullname	not running"
   fi
-  if [ "$(sudo docker ps -q -f name=owasp-bricks)" ]; then
-    echo "Owasp Bricks	running at http://owasp-bricks"
-  else 
-    echo "Owasp Bricks	not running"
-  fi
-  if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
-    echo "bWaPP				running at http://bwapp"
-  else 
-    echo "bWaPP				not running"
-  fi
-  if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
-    echo "WackoPicko				running at http://wackopicko"
-  else 
-    echo "WackoPicko				not running"
-  fi
-  if [ "$(sudo docker ps -q -f name=vulnerablewordpress)" ]; then
-    echo "WPScan Vulnerable Wordpress 	running at http://vulnerablewordpress"
-  else 
-    echo "WPScan Vulnerable Wordpress	not running"  
-  fi
-  if [ "$(sudo docker ps -q -f name=securityninjas)" ]; then
-    echo "OpenDNS Security Ninjas 	running at http://securityninjas"
-  else 
-    echo "OpenDNS Security Ninjas	not running"  
-  fi
-}
+  # if [ "$(sudo docker ps -q -f name=owasp-bricks)" ]; then
+    # echo "Owasp Bricks	running at http://ip"
+  # else 
+    # echo "Owasp Bricks	not running"
+  # fi
+  # if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
+    # echo "bWaPP				running at http://ip"
+  # else 
+    # echo "bWaPP				not running"
+  # fi
+  # if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
+    # echo "WackoPicko				running at http://ip"
+  # else 
+    # echo "WackoPicko				not running"
+  # fi
+  # if [ "$(sudo docker ps -q -f name=vulnerablewordpress)" ]; then
+    # echo "WPScan Vulnerable Wordpress 	running at http://vulnerablewordpress"
+  # else 
+    # echo "WPScan Vulnerable Wordpress	not running"  
+  # fi
+  # if [ "$(sudo docker ps -q -f name=securityninjas)" ]; then
+    # echo "OpenDNS Security Ninjas 	running at http://securityninjas"
+  # else 
+    # echo "OpenDNS Security Ninjas	not running"  
+  # fi
+# }
 
 project_start_dispatch()
 {
