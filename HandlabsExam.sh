@@ -197,14 +197,14 @@ project_stop ()
 
 project_status()
 { 
-  if ["$(sudo docker ps -q -f status=running)"]
+  fullname=$1		  # ex. Nowasp
+  projectname=$2      # ex. nowasp
+  ip=$4   			  # ex. 127.15.0.1
+    
+  if ["$(sudo docker ps -q -f status=running)"];
   then 
-  fullname=$1		 # ex. Nowasp
-  projectname=$2     # ex. nowasp
   echo "$fullname running"
   else
-  fullname=$1		 # ex. Nowasp
-  projectname=$2
   echo "$fullname not running"
   fi
 }
