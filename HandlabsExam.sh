@@ -164,7 +164,7 @@ project_start ()
   else
     if [ -n "${6+set}" ]; then
       echo "Running command: docker run --name $projectname -d -p $ip:80:$port -p $ip:$port2:$port2 $dockername"
-      sudo docker run --name $projectname -d -p $ip:80:$port -p $ip:$port2:$port2 $dockername
+      sudo docker run --name $projectname -d -p $ip:80:$port -p $ip:$port2:$port2 -e MYSQL_PASS="2Chang3ME!" $dockername
     else echo "not set";
       echo "Running command: docker run --name $projectname -d -p $ip:80:$port $dockername"
       sudo docker run --name $projectname -d -p $ip:80:$port $dockername
