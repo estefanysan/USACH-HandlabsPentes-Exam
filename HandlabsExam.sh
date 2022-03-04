@@ -202,9 +202,9 @@ project_status()
 
   if [ "$(sudo docker ps -q -f status=running)" ]
   then
-    echo " $fullname	    corriendo at http://$ip "
+    echo $fullname "running at http://"$ip
   else 
-    echo " $fullname	    not corriendo "
+    echo $fullname	"not running"
   fi
   echo "$fullname esta en la url  http://$ip"
 }
