@@ -288,7 +288,7 @@ project_status()
     echo "WPScan Vulnerable Wordpress not running"  
   fi
   if [ "$(sudo docker ps -q -f name=securityninjas)" ]; then
-    echo "OpenDNS Security Ninjas 	running at http://127.1.0.1"
+    echo "OpenDNS Security Ninjas 	running at http://127.14.0.1"
   else 
     echo "OpenDNS Security Ninjas	not running"  
   fi
@@ -319,7 +319,7 @@ project_start_dispatch()
       project_startinfo_vulnerablewordpress
     ;;
     securityninjas)    
-      project_start "Open DNS Security Ninjas" "securityninjas" "opendns/security-ninjas" "127.1.0.1" "80"
+      project_start "Open DNS Security Ninjas" "securityninjas" "opendns/security-ninjas" "127.14.0.1" "80"
       project_startinfo_securityninjas
     ;;
     *)
