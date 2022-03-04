@@ -197,15 +197,35 @@ project_stop ()
 
 project_status()
 { 
-  fullname=$1		  # ex. Nowasp
-  projectname=$2      # ex. nowasp
-  ip=$4   			  # ex. 127.15.0.1
-    
-  if [ "$(sudo docker ps -aq -f name=$projectname)" ];
-  then 
-	echo "$projectname running"
-  else
-	echo "$fullname not running"
+  if [ "$(sudo docker ps -q -f name=nowasp)" ]; then
+    echo "Nowasp running at http://127.15.0.1"
+  else 
+    echo "Nowasp not running"
+  fi
+  if [ "$(sudo docker ps -q -f name=owasp-bricks)" ]; then
+    echo "Owasp-Bricks	running at http://127.10.0.1"
+  else 
+    echo "Owasp-Bricks	not running"  
+  fi
+  if [ "$(sudo docker ps -q -f name=bwapp)" ]; then
+    echo "bWapp	running at http://127.5.0.1"
+  else 
+    echo "bWapp	not running"  
+  fi
+  if [ "$(sudo docker ps -q -f name=wackopicko)" ]; then
+    echo "WackoPicko running at http://127.0.0.1"
+  else 
+    echo "WackoPicko not running"  
+  fi
+  if [ "$(sudo docker ps -q -f name=vulnerablewordpress)" ]; then
+    echo "WPScan Vulnerable Wordpress running at http://127.13.0.1"
+  else 
+    echo "WPScan Vulnerable Wordpress not running"  
+  fi
+  if [ "$(sudo docker ps -q -f name=securityninjas)" ]; then
+    echo "OpenDNS Security Ninjas 	running at http://127.14.0.1"
+  else 
+    echo "OpenDNS Security Ninjas	not running"  
   fi
 }
 
