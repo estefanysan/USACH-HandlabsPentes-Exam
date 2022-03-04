@@ -227,7 +227,7 @@ project_status()
   # else 
     # echo "OpenDNS Security Ninjas	not running"  
   # fi
-# }
+}
 
 project_start_dispatch()
 {
