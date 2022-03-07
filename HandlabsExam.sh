@@ -11,7 +11,7 @@ show_help() {
     echo " ./HandlabsExam.sh start nowasp   - Start project and make it available on localhost"
 	echo " ./HandlabsExam.sh stop nowasp    - Stop project available on localhost"
     echo " ./HandlabsExam.sh status        - Show status for all projects"
-    echo " ./HandlabsExam.sh info nowasp    - Show information about bwapp project"
+    echo " ./HandlabsExam.sh info nowasp    - Show information about Nowasp project"
 	echo " ./HandlabsExam.sh list          - List all available projects"
 	echo
     echo " Dockerfiles from:"
