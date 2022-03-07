@@ -15,8 +15,9 @@ The follow are the available web apps:
 
 ## Getting Started
 
-git clone https://github.com/estefanysan/USACH-HandlabsPentes-Exam
-cd HandlabsExam.sh
+1. git clone https://github.com/estefanysan/USACH-HandlabsPentes-Exam
+
+2. cd HandlabsExam.sh
 
 If you have not installed docker on your x64 Kali system
 you can run this script (tested as of Jul 2019)
